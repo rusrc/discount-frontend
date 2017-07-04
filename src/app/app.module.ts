@@ -39,7 +39,10 @@ export function createTranslateLoader(http: Http)
     ],
     imports: [
         BrowserModule,
-        RouterModule.forRoot(routerConfig, { enableTracing: true }),
+        RouterModule.forRoot(routerConfig, {
+            enableTracing: false,
+            useHash: true
+        }),
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

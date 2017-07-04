@@ -6,11 +6,6 @@ import { RealstateListComponent } from "app/admin-module/realstate-list/realstat
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routerConfig: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: "dashboard",
-  //   component: DashboardComponent
-  // },
   {
     path: '',
     component: DashboardComponent,
