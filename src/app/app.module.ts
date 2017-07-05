@@ -10,6 +10,7 @@ import { HttpModule, Http } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
+//http://tukifly.azurewebsites.net/Akkol/ru-Ru/Home/About
 const routerConfig: Routes = [
     {
         path: '',
@@ -18,17 +19,24 @@ const routerConfig: Routes = [
     },
     {
         path: "home",
-        component: HomeComponent
+        component: HomeComponent,
+        children: [
+            //{ path: '', component: HomeComponent },
+            { path: ':city', component: HomeComponent }
+        ]
     },
     {
         path: 'admin',
         loadChildren: 'app/admin-module/admin.module#AdminModule'
+    },
+    {
+        path: 'room',
+        loadChildren: 'app/room-module/room/room.module#RoomModule'
     }
 ]
 
 //https://github.com/ngx-translate/core
-export function createTranslateLoader(http: Http)
-{
+export function createTranslateLoader(http: Http) {
     return new TranslateHttpLoader(http, './i18n/', '.json');
 }
 
@@ -47,11 +55,11 @@ export function createTranslateLoader(http: Http)
             loader: {
                 provide: TranslateLoader,
                 useFactory: (createTranslateLoader),
-                deps: [ Http ]
+                deps: [Http]
             }
         })
     ],
     providers: [],
-    bootstrap: [ AppComponent ]
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
