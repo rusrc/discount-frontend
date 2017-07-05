@@ -10,19 +10,19 @@ import { HttpModule, Http } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
+//drag and drop https://github.com/akserg/ng2-dnd
 //http://tukifly.azurewebsites.net/Akkol/ru-Ru/Home/About
 const routerConfig: Routes = [
     {
-        path: '',
-        redirectTo: "home",
-        pathMatch: 'full'
+        path: '', redirectTo: "home", pathMatch: 'full'
     },
     {
-        path: "home",
-        component: HomeComponent,
+        path: "home", component: HomeComponent,
         children: [
             //{ path: '', component: HomeComponent },
-            { path: ':city', component: HomeComponent }
+            {
+                path: ':city', component: HomeComponent
+            }
         ]
     },
     {
@@ -32,7 +32,8 @@ const routerConfig: Routes = [
     {
         path: 'room',
         loadChildren: 'app/room-module/room/room.module#RoomModule'
-    }
+    },
+    { path: '**', redirectTo: 'home' }//Not found
 ]
 
 //https://github.com/ngx-translate/core
@@ -49,7 +50,7 @@ export function createTranslateLoader(http: Http) {
         BrowserModule,
         RouterModule.forRoot(routerConfig, {
             enableTracing: false,
-            useHash: true
+            useHash: false
         }),
         TranslateModule.forRoot({
             loader: {
