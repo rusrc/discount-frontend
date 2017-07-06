@@ -39,7 +39,9 @@
 
     <div class="row well">
         <section class="masonry">
-            <app-promotion-item *ngFor="let promotionItem of promotionItems" [promotionItem]="promotionItem"></app-promotion-item>
+            <app-promotion-item *ngFor="let promotionItem of promotionItems" [promotionItem]="promotionItem">
+                <span style="color:white;">Loading...</span>
+            </app-promotion-item>
         </section>
     </div>
     <!--

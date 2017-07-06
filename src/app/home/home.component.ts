@@ -1,25 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck, AfterContentInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap, NavigationEnd } from "@angular/router";
-import 'rxjs/add/operator/switchMap';
 import { PromotionItem } from "app/models/promotion-item";
 import { PromotionItemService } from "app/services/promotion-item.service";
-
+import 'rxjs/add/operator/switchMap';
 
 @Component({
     selector: 'app-home',
-    providers:[PromotionItemService],
+    providers: [ PromotionItemService ],
     templateUrl: './home.component.html',
-    styleUrls: ['./home.component.css']
+    styleUrls: [ './home.component.css' ]
 })
-export class HomeComponent implements OnInit {
-
+export class HomeComponent implements OnInit
+{
     promotionItems: PromotionItem[] = [];
 
     constructor(
         private router: Router,
         private activeRoute: ActivatedRoute,
         private promotionItemService: PromotionItemService
-    ) {
+    )
+    {
 
         // this.promotionItems = [
         //     new PromotionItem(),
@@ -28,10 +28,10 @@ export class HomeComponent implements OnInit {
 
     }
 
-    async ngOnInit() {
-
+    async ngOnInit()
+    {
         let city = this.activeRoute.snapshot.firstChild
-            ? this.activeRoute.snapshot.firstChild.url[0].path
+            ? this.activeRoute.snapshot.firstChild.url[ 0 ].path
             : "";
 
         this.promotionItems = await this.promotionItemService.getAll();

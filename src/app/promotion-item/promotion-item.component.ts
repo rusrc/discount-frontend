@@ -1,19 +1,25 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterContentInit } from '@angular/core';
 import { PromotionItem } from "app/models/promotion-item";
 
 
 @Component({
-  selector: 'app-promotion-item',
-  templateUrl: './promotion-item.component.html',
-  styleUrls: ['./promotion-item.component.css']
+    selector: 'app-promotion-item',
+    templateUrl: './promotion-item.component.html',
+    styleUrls: [ './promotion-item.component.css' ]
 })
-export class PromotionItemComponent implements OnInit {
+export class PromotionItemComponent implements OnInit, AfterContentInit
+{
+    constructor() { }
 
-  constructor() { }
+    @Input() promotionItem: PromotionItem;
 
-  @Input() promotionItem: PromotionItem;
+    ngOnInit()
+    {
+    }
 
-  ngOnInit() {
-  }
+    ngAfterContentInit(): void
+    {
+        (<any>window).runMasonry();
+    }
 
 }

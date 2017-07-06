@@ -1,6 +1,6 @@
 {
-    "api": {
-        "target": "http://tukifly.azurewebsites.net/api/PromotionItem2",
+    "/api": {
+        "target": "http://localhost:49737",
         "secure": false
     }
 }
