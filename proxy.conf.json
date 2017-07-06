@@ -1,0 +1,6 @@
+{
+    "api": {
+        "target": "http://tukifly.azurewebsites.net/api/PromotionItem2",
+        "secure": false
+    }
+}

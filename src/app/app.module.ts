@@ -9,6 +9,8 @@ import { HttpModule, Http } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { PromotionItemComponent } from './promotion-item/promotion-item.component';
 
 //drag and drop https://github.com/akserg/ng2-dnd
 //http://tukifly.azurewebsites.net/Akkol/ru-Ru/Home/About
@@ -24,6 +26,10 @@ const routerConfig: Routes = [
                 path: ':city', component: HomeComponent
             }
         ]
+    },
+    {
+        path: 'about',
+        component: AboutComponent
     },
     {
         path: 'admin',
@@ -44,10 +50,13 @@ export function createTranslateLoader(http: Http) {
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        AboutComponent,
+        PromotionItemComponent
     ],
     imports: [
         BrowserModule,
+        HttpModule,
         RouterModule.forRoot(routerConfig, {
             enableTracing: false,
             useHash: false

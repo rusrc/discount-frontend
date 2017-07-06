@@ -1,5 +1,5 @@
 <!--The whole content below can be removed with the new code.-->
-<h2>Here are some links to help you start: </h2>
+<!--<h2>Here are some links to help you start: </h2>
 <ul>
     <li>
         <h2><a routerLink="/" routerLinkActive="active">Home</a></h2>
@@ -7,6 +7,78 @@
         <h2><a routerLink="/room" routerLinkActive="active">Room</a></h2>
     </li>
 
-</ul>
+</ul>-->
 
-<router-outlet></router-outlet>
+<header>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        </button>
+                <a class="navbar-brand" routerLink="/" routerLinkActive="active">DISCOUNTAPP</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Катерии <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Дом и сад</a></li>
+                            <li><a href="#">Животные и товары для питомцев</a></li>
+                            <li><a href="#">Игры и игрушки</a></li>
+                            <li><a href="#">Искусство и развлечения</a></li>
+                            <li><a href="#">Камеры и оптика</a></li>
+                            <li><a href="#">Канцелярские товары</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Магазины <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="addNewShop.html">Добавить магазин</a></li>
+                            <li><a href="addPromotionForShop.html">Добавить Акцию к магазину</a></li>
+                            <li><a href="#">Добавить адрес</a></li>
+                            <li><a href="shopList.html">Магазины</a></li>
+                            <li><a href="promotionList.html">Акции</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="subscriptionList.html">Подписки</a></li>
+                        </ul>
+                    </li>
+                    <li><a routerLink="/about" routerLinkActive="active">О проекте</a></li>
+                    <li><a routerLink="/room" routerLinkActive="active">Комната</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <!--<li><a href="../navbar/">Default</a></li>
+                        <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li>-->
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">example_user@gmail.com <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="addNewShop.html">Добавить магазин</a></li>
+                            <li><a href="addPromotionForShop.html">Добавить Акцию к магазину</a></li>
+                            <li><a href="addresses.html">Добавить адрес</a></li>
+                            <li><a href="shopList.html">Магазины</a></li>
+                            <li><a href="promotionList.html">Акции</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="subscriptionList.html">Подписки</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Русский <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Русский</a></li>
+                            <li><a href="#">Казякский</a></li>
+                            <li><a href="#">Английский</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+</header>
+
+<main>
+    <router-outlet></router-outlet>
+</main>
