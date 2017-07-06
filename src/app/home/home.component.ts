@@ -13,6 +13,7 @@ import 'rxjs/add/operator/switchMap';
 export class HomeComponent implements OnInit
 {
     promotionItems: PromotionItem[] = [];
+    loading: string = 'loading...';
 
     constructor(
         private router: Router,
@@ -35,7 +36,9 @@ export class HomeComponent implements OnInit
             : "";
 
         this.promotionItems = await this.promotionItemService.getAll();
+        this.loading = '';
 
+        console.log(this.promotionItems);
         console.log("Path from root", city);
 
         // this.router.events.subscribe((event) => {
