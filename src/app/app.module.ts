@@ -5,13 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpModule, Http } from '@angular/http';
-
+import { MasonryModule } from 'angular2-masonry';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { PromotionItemComponent } from './promotion-item/promotion-item.component';
 
+//https://github.com/jelgblad/angular2-masonry
 //drag and drop https://github.com/akserg/ng2-dnd
 //http://tukifly.azurewebsites.net/Akkol/ru-Ru/Home/About
 const routerConfig: Routes = [
@@ -57,6 +58,7 @@ export function createTranslateLoader(http: Http) {
     imports: [
         BrowserModule,
         HttpModule,
+        MasonryModule,
         RouterModule.forRoot(routerConfig, {
             enableTracing: false,
             useHash: false

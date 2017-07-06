@@ -39,11 +39,19 @@
 
     <div class="row well">
         <span style="color:white;">{{loading}}</span>
-        <section class="masonry">
-            <app-promotion-item *ngFor="let promotionItem of promotionItems" [promotionItem]="promotionItem">
-                
-            </app-promotion-item>
+        <section class="_masonry">
+            <masonry [options]="options" [useImagesLoaded]="true">
+
+                <app-promotion-item masonry-brick *ngFor="let promotionItem of promotionItems" [promotionItem]="promotionItem">
+
+                </app-promotion-item>
+
+            </masonry>
         </section>
+
+        <!--<masonry>
+            <masonry-brick class="brick" *ngFor="let brick of bricks">{{brick.title}}</masonry-brick>
+        </masonry>-->
     </div>
     <!--
             <div class="row well">

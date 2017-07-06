@@ -19,7 +19,7 @@ export class PromotionItemComponent implements OnInit, AfterContentInit
 
     ngAfterContentInit(): void
     {
-        (<any>window).runMasonry();
+        //(<any>window).runMasonry();
     }
 
 }

@@ -1,19 +1,31 @@
-import { Component, OnInit, DoCheck, AfterContentInit } from '@angular/core';
+import { Component, OnInit, DoCheck, AfterContentInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap, NavigationEnd } from "@angular/router";
 import { PromotionItem } from "app/models/promotion-item";
 import { PromotionItemService } from "app/services/promotion-item.service";
+import { AngularMasonry, MasonryOptions } from 'angular2-masonry';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
     selector: 'app-home',
     providers: [ PromotionItemService ],
     templateUrl: './home.component.html',
-    styleUrls: [ './home.component.css' ]
+    styles: [ `
+    .brick { 
+      width: 200px;
+    }
+  `]
 })
-export class HomeComponent implements OnInit
+export class HomeComponent implements OnInit, AfterViewInit
 {
     promotionItems: PromotionItem[] = [];
     loading: string = 'loading...';
+    options: MasonryOptions = {
+        transitionDuration: '0.3s',
+        itemSelector: '.post-box',
+        columnWidth: '.post-box'
+    }
+
+    @ViewChild(AngularMasonry) masonry: AngularMasonry;
 
     constructor(
         private router: Router,
@@ -28,7 +40,13 @@ export class HomeComponent implements OnInit
         // ];
 
     }
-
+    ngAfterViewInit()
+    {
+        this.masonry.layoutComplete.subscribe(() =>
+        {
+            console.log('layout');
+        });
+    }
     async ngOnInit()
     {
         let city = this.activeRoute.snapshot.firstChild
