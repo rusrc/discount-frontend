@@ -19,6 +19,8 @@ export class HomeComponent implements OnInit, AfterViewInit
 {
     promotionItems: PromotionItem[] = [];
     loading: string = 'loading...';
+    gifLoader: boolean = true;
+
     options: MasonryOptions = {
         transitionDuration: '0.3s',
         itemSelector: '.post-box',
@@ -55,6 +57,7 @@ export class HomeComponent implements OnInit, AfterViewInit
 
         this.promotionItems = await this.promotionItemService.getAll();
         this.loading = '';
+        this.gifLoader = false;
 
         console.log(this.promotionItems);
         console.log("Path from root", city);
