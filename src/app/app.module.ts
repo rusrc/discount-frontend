@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { PromotionItemComponent } from './promotion-item/promotion-item.component';
+import { PaginationModule } from "app/pagination-module/pagination/pagination.module";
 
 //https://github.com/jelgblad/angular2-masonry
 //drag and drop https://github.com/akserg/ng2-dnd
@@ -59,6 +60,7 @@ export function createTranslateLoader(http: Http) {
         BrowserModule,
         HttpModule,
         MasonryModule,
+        PaginationModule.forRoot(),
         RouterModule.forRoot(routerConfig, {
             enableTracing: false,
             useHash: false

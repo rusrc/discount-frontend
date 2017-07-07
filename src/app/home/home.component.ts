@@ -4,6 +4,7 @@ import { PromotionItem } from "app/models/promotion-item";
 import { PromotionItemService } from "app/services/promotion-item.service";
 import { AngularMasonry, MasonryOptions } from 'angular2-masonry';
 import 'rxjs/add/operator/switchMap';
+import { Page } from "app/pagination-module/page";
 
 const PROMOTION_ITEMS = 'promotionItems';
 const PROMOTION_FIRST_TIME_LOADED = 'promotionTimeLoaded';
@@ -16,8 +17,9 @@ const TIME_LIMIT_SECONDS = 30;
 })
 export class HomeComponent implements OnInit, AfterViewInit
 {
-    promotionItems: PromotionItem[] = [];
+    promotionItems: PromotionItem[];
     gifLoader: boolean = true;
+    page: Page<PromotionItem>;
 
     options: MasonryOptions = {
         transitionDuration: '0.3s',
@@ -35,17 +37,19 @@ export class HomeComponent implements OnInit, AfterViewInit
 
     ngAfterViewInit()
     {
-        this.masonry.layoutComplete.subscribe(() => console.log('layout'));
+        //this.masonry.layoutComplete.subscribe(() => console.log('layout'));
     }
 
     async ngOnInit()
     {
         let city = this.activeRoute.snapshot.firstChild ? this.activeRoute.snapshot.firstChild.url[0].path : "";
+        let pageWithItems = await this.getPromotionItems();
 
-        this.promotionItems = await this.getPromotionItems();
+        this.promotionItems = pageWithItems.Items;
+        this.page = pageWithItems;
         this.gifLoader = false;
 
-        console.log(this.promotionItems);
+        console.log("page", this.page);
         console.log("Path from root", city);
 
         // this.router.events.subscribe((event) => {
@@ -55,23 +59,23 @@ export class HomeComponent implements OnInit, AfterViewInit
         // });
     }
 
-    private async getPromotionItems(): Promise<PromotionItem[]>
+    private async getPromotionItems(): Promise<Page<PromotionItem>>
     {
 
         if (localStorage.getItem(PROMOTION_ITEMS) && !this.promotionTimeExpired)
         {
-            return Promise.resolve<PromotionItem[]>(JSON.parse(localStorage.getItem(PROMOTION_ITEMS)));
+            return Promise.resolve<Page<PromotionItem>>(JSON.parse(localStorage.getItem(PROMOTION_ITEMS)));
         }
         else
         {
-            let items = await this.promotionItemService.getAll();
-
-            if (items.length)
+            let promotionItemResult = await this.promotionItemService.getAll();
+            console.log(promotionItemResult);
+            if (promotionItemResult.Items.length)
             {
-                localStorage.setItem(PROMOTION_ITEMS, JSON.stringify(items));
+                localStorage.setItem(PROMOTION_ITEMS, JSON.stringify(promotionItemResult));
             }
 
-            return items;
+            return promotionItemResult;
         }
     }
 

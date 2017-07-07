@@ -1,0 +1,69 @@
+<!--<ul class="pagination">
+    <li class="disabled"><a href="javascript:void(0)">«</a></li>
+    <li class="active"><a href="javascript:void(0)">{{page}}</a></li>
+    <li><a href="javascript:void(0)">2</a></li>
+    <li><a href="javascript:void(0)">3<div class="ripple-container"></div></a></li>
+    <li><a href="javascript:void(0)">4</a></li>
+    <li><a href="javascript:void(0)">5</a></li>
+    <li><a href="javascript:void(0)">»</a></li>
+</ul>-->
+
+
+
+<nav *ngIf="page && page.TotalItemCount" aria-label="Page navigation">
+    <ul class="pagination">
+
+        <li *ngIf="page.IsLastPage"><a class="pagination__link" data-value="1" href="#">««</a></li>
+
+        <li *ngIf="page.HasPreviousPage">
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+
+        <!--<% var isCenter = p.PageCount - p.PageNumber > 5 && p.PageNumber > 5 %>
+            <% var isLast = p.PageCount - p.PageNumber <= 5 %>
+            <% var firstPageNumber = isCenter ? p.PageNumber - 5 : (isLast) ? p.PageCount - 10 : 1 %>
+            <% var lastPageNumber = (isCenter) ? p.PageNumber + 4 : (isLast) ? p.PageCount : 10 %>-->
+
+        <!-- If count number less then 10 -->
+
+        <!--<%if(p.PageCount <= 10){%>
+            <% firstPageNumber = 1 %>
+            <% lastPageNumber = p.PageCount %>
+            <%}%>-->
+
+        <ng-container *ngFor="let i of generateArray()">
+            <li *ngIf="page.PageNumber === i" class="active"><a class="pagination__link" [attr.data-value]="i" href="#">{{i}}</a></li>
+
+            <li *ngIf="page.PageNumber !== i"><a class="pagination__link" [attr.data-value]="i" href="#">{{i}}</a></li>
+        </ng-container>
+
+
+        <!--<%for (var i = firstPageNumber; i <= lastPageNumber; i++){%>
+
+                <%if(p.PageNumber === i){%>
+                <li class="active"><a class="pagination__link" data-value="<%=i%>" href="#"><%=i%></a></li>
+                <%}else {%>
+                <li><a class="pagination__link" data-value="<%=i%>" href="#"><%=i%></a></li>
+                <%}%>
+
+            <%}%>-->
+
+        <li *ngIf="page.HasNextPage">
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+
+
+        <li *ngIf="page.IsFirstPage"><a class="pagination__link" [attr.data-value]="page.PageCount" href="#">»»</a></li>
+
+    </ul>
+</nav>
+
+<!--
+  <label *ngIf="j === 0; else elseBlock">{{val}}</label>
+<ng-template #elseBlock>
+    <label style="color:#000000;font-size:12px;padding-top: 5px">{{val}}</label>
+</ng-template>-->
