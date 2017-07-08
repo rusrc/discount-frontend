@@ -19,7 +19,7 @@
         "prefix": "app",
         "styles": [
             "../node_modules/bootstrap/dist/css/bootstrap.css",
-            "../node_modules/bootswatch/journal/bootstrap.css",
+            "../node_modules/bootswatch/darkly/bootstrap.css",
             "styles.css"
         ],
         "scripts": [
