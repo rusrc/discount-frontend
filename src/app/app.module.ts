@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { PromotionItemComponent } from './promotion-item/promotion-item.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { AuthorizationComponent } from './authorization/authorization.component';
 
 //https://github.com/jelgblad/angular2-masonry
 //drag and drop https://github.com/akserg/ng2-dnd
@@ -28,23 +30,17 @@ const routerConfig: Routes = [
             }
         ]
     },
-    {
-        path: 'about',
-        component: AboutComponent
-    },
-    {
-        path: 'admin',
-        loadChildren: 'app/admin-module/admin.module#AdminModule'
-    },
-    {
-        path: 'room',
-        loadChildren: 'app/room-module/room/room.module#RoomModule'
-    },
+    { path: 'about', component: AboutComponent },
+    { path: 'admin', loadChildren: 'app/admin-module/admin.module#AdminModule' },
+    { path: 'room', loadChildren: 'app/room-module/room/room.module#RoomModule' },
+    { path: 'registration', component: RegistrationComponent },
+    { path: 'authorization', component: AuthorizationComponent },
     { path: '**', redirectTo: 'home' }//Not found
 ]
 
 //https://github.com/ngx-translate/core
-export function createTranslateLoader(http: Http) {
+export function createTranslateLoader(http: Http)
+{
     return new TranslateHttpLoader(http, './i18n/', '.json');
 }
 
@@ -53,7 +49,9 @@ export function createTranslateLoader(http: Http) {
         AppComponent,
         HomeComponent,
         AboutComponent,
-        PromotionItemComponent
+        PromotionItemComponent,
+        RegistrationComponent,
+        AuthorizationComponent
     ],
     imports: [
         BrowserModule,
@@ -67,11 +65,11 @@ export function createTranslateLoader(http: Http) {
             loader: {
                 provide: TranslateLoader,
                 useFactory: (createTranslateLoader),
-                deps: [Http]
+                deps: [ Http ]
             }
         })
     ],
     providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: [ AppComponent ]
 })
 export class AppModule { }
