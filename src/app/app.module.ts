@@ -13,7 +13,7 @@ import { AboutComponent } from './about/about.component';
 import { PromotionItemComponent } from './promotion-item/promotion-item.component';
 
 import { RegistrationComponent } from './registration/registration.component';
-import { AuthorizationComponent } from './authorization/authorization.component';import { PaginationModule } from "app/pagination-module/pagination/pagination.module";
+import { AuthorizationComponent } from './authorization/authorization.component'; import { PaginationModule } from "app/pagination-module/pagination/pagination.module";
 //https://github.com/jelgblad/angular2-masonry
 //drag and drop https://github.com/akserg/ng2-dnd
 //http://tukifly.azurewebsites.net/Akkol/ru-Ru/Home/About
@@ -24,9 +24,11 @@ const routerConfig: Routes = [
     {
         path: "home", component: HomeComponent,
         children: [
-            //{ path: '', component: HomeComponent },
             {
-                path: ':city', component: HomeComponent
+                path: ':city', component: HomeComponent,
+                children: [
+                    { path: ':page', component: HomeComponent }
+                ]
             }
         ]
     },
@@ -66,11 +68,11 @@ export function createTranslateLoader(http: Http)
             loader: {
                 provide: TranslateLoader,
                 useFactory: (createTranslateLoader),
-                deps: [ Http ]
+                deps: [Http]
             }
         })
     ],
     providers: [],
-    bootstrap: [ AppComponent ]
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

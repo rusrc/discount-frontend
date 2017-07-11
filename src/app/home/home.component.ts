@@ -1,10 +1,11 @@
 import { Component, OnInit, DoCheck, AfterContentInit, ViewChild, AfterViewInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap, NavigationEnd } from "@angular/router";
+import { Router, ActivatedRoute, ParamMap, NavigationEnd, UrlSegment, UrlSegmentGroup, UrlTree, PRIMARY_OUTLET } from "@angular/router";
 import { PromotionItem } from "app/models/promotion-item";
 import { PromotionItemService } from "app/services/promotion-item.service";
 import { AngularMasonry, MasonryOptions } from 'angular2-masonry';
 import 'rxjs/add/operator/switchMap';
 import { Page } from "app/pagination-module/page";
+import { CityService } from "app/services/city.service";
 
 const PROMOTION_ITEMS = 'promotionItems';
 const PROMOTION_FIRST_TIME_LOADED = 'promotionTimeLoaded';
@@ -12,7 +13,10 @@ const TIME_LIMIT_SECONDS = 1;
 
 @Component({
     selector: 'app-home',
-    providers: [PromotionItemService],
+    providers: [
+        PromotionItemService,
+        CityService
+    ],
     templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit, AfterViewInit
@@ -32,7 +36,8 @@ export class HomeComponent implements OnInit, AfterViewInit
     constructor(
         private router: Router,
         private activeRoute: ActivatedRoute,
-        private promotionItemService: PromotionItemService
+        private promotionItemService: PromotionItemService,
+        private cityService: CityService
     ) { }
 
     ngAfterViewInit()
@@ -42,14 +47,42 @@ export class HomeComponent implements OnInit, AfterViewInit
 
     async ngOnInit()
     {
-        let city = this.activeRoute.snapshot.firstChild ? this.activeRoute.snapshot.firstChild.url[0].path : "";
-        let pageWithItems = await this.getPromotionItems();
+        //https://angular.io/api/router/UrlSegment
+        const tree: UrlTree = this.router.parseUrl(this.router.url);
+        const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
+        const segments: UrlSegment[] = g.segments;
+
+        let urlCity = g.segments[1] ? g.segments[1].path : "";
+        let page = g.segments[2] ? g.segments[2].path : "";
+
+        let pageWithItems: Page<PromotionItem> = null;
+        let cities = await this.cityService.getAll();
+
+
+
+        if (urlCity && cities.some(city => city.Alias === urlCity))
+        {
+            console.log("with city only", urlCity)
+            pageWithItems = await this.getPromotionItems();
+        }
+
+        if (urlCity && !cities.some(city => city.Alias === urlCity))
+        {
+            console.log("AllCities");
+            pageWithItems = await this.getPromotionItems();
+        }
+
+        if (!urlCity)
+        {
+            console.log("Without cities");
+            pageWithItems = await this.getPromotionItems();
+        }
 
         this.promotionItems = pageWithItems.Items;
         this.page = pageWithItems;
         this.gifLoader = false;
 
-        console.log("Path from root", city);
+        console.log("Path from root", urlCity, page);
 
         // this.router.events.subscribe((event) => {
         //   if (event instanceof NavigationEnd) {
@@ -81,11 +114,11 @@ export class HomeComponent implements OnInit, AfterViewInit
     private get promotionTimeExpired(): boolean
     {
         var firstTimeLoaded: number = Number.parseInt(localStorage.getItem(PROMOTION_FIRST_TIME_LOADED) || "0");
-        var result  = false;
+        var result = false;
 
         if (firstTimeLoaded)
         {
-           result = Math.round((Date.now() - firstTimeLoaded) / 1000) >= TIME_LIMIT_SECONDS;
+            result = Math.round((Date.now() - firstTimeLoaded) / 1000) >= TIME_LIMIT_SECONDS;
         }
 
         localStorage.setItem(PROMOTION_FIRST_TIME_LOADED, Date.now().toString());
