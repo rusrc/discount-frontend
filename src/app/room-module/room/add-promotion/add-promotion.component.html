@@ -1,0 +1,142 @@
+<div class="col-lg-6 col-md-6 well">
+    <h1 class="h3"><a>Добавить акцию</a></h1>
+
+    <fieldset>
+        <div class="form-group label-floating is-empty">
+            <label class="control-label" for="Name">Укажите название акции</label>
+            <input class="form-control text-box single-line" data-val="true" data-val-required="The Укажите название акции field is required."
+                id="Name" name="Name" type="text" value="">
+            <span class="field-validation-valid text-danger" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+            <p class="help-block">Например: "Новогодняя распродажа"</p>
+        </div>
+        <div class="form-group is-empty">
+            <label class="control-label" for="Addresses">В каких магазинах будут акции</label> |
+            <a href="/AllCities/ru-Ru/Merchant/Add">или добавьте сферу</a>
+            <select class="form-control chosen-select" data-placeholder="Выберите магазины" id="RealEstateSelected" multiple="" name="RealEstateSelected">
+                <option value="1">ТОО "Nasa", Алматы, Калинина, д. 20</option>
+                <option value="2">ТОО "Nasa", Алматы, Абая, д 15</option>
+                <option value="3">ТОО "Nasa", Алматы, Жибекжолы, д10</option>
+                <option value="4">ТОО "Nasa", Аягоз, Жокта, д. 5</option>
+                <option value="5">ТОО "Nasa", Шымкент, Торекулова, д. 64</option>
+                <option value="6">ТОО "Машинка", Алматы, Космонавтов, д. 450</option>
+                <option value="7">ТОО "Машинка", Алматы, Ташкентская, д.3</option>
+                <option value="8">ТОО "Nasa", Аксай, Улица тест, д.5</option>
+                <option value="9">ТОО "Машинка", Алматы, Толе би 30</option>
+            </select>
+            
+            <span class="field-validation-valid text-danger" data-valmsg-for="Addresses" data-valmsg-replace="true"></span>
+        </div>
+    </fieldset>
+
+    <fieldset id="dropzoneContainer">
+        <div class="row">
+            <div class="col-lg-12">
+                <input id="addItemBtn" class="btn btn-default" type="submit" value="Добавить позицию/товар">
+                <span>&nbsp;&nbsp;<span class="field-validation-valid text-danger" data-valmsg-for="PromotionItems" data-valmsg-replace="true"></span></span>
+            </div>
+        </div>
+        <hr>
+        <section class="alert alert-dismissible promotion-item">
+            <div class="row">
+                <button type="button" class="close" data-value="0" _data-dismiss="alert" aria-label="_Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div action="" class="dropzone dz-clickable">
+                        <input type="file" _multiple="" name="file" style="display:none;">
+                        <input type="hidden" value="" id="PromotionItems_0__TempFolder" name="PromotionItems[0].TempFolder">
+                        <div class="dz-default dz-message"><span>Добавьте одну фотографию</span></div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="is-empty row">
+                        <div class="col-md-12">
+                            <div class="form-group is-empty">
+                                <label class="control-label" for="PromotionItems_0__Name">Название товара</label>
+                                <input class="form-control text-box single-line" id="PromotionItems_0__Name" name="PromotionItems[0].Name" placeholder="Название товара (необязательное)"
+                                    type="text" value="">
+                            </div>
+                            <span class="field-validation-valid text-danger" data-valmsg-for="item.Name" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="is-empty row">
+                        <div class="col-md-12">
+                            <div class="form-group is-empty">
+                                <label class="control-label" for="PromotionItems_0__CategoryId">Категория</label>
+                                <select class="form-control valid" id="PromotionItems_0__CategoryId" name="PromotionItems[0].CategoryId" placeholder="Категория товара"
+                                    aria-invalid="false">
+                            <option></option>
+                            <option value="1">Багаж и сумки</option><option value="6">Бизнес и промышленность</option><option value="11">Бытовые приборы</option><option value="14">Вентиляторы</option><option value="12">Водонагреватели (Бойлеры, Газовые колонки)</option><option value="10">Дом и сад</option><option value="2">Дорожные косметички, несессеры</option><option value="13">Климат-контроль</option><option value="16">Кондиционеры воздуха</option><option value="7">Лабораторное и научное оборудование</option><option value="8">Лабораторное оборудование</option><option value="9">Лабораторные холодильники</option><option value="15">Настольные и напольные вентиляторы</option><option value="17">Обогреватели, конвекторы, тепловентиляторы</option><option value="18">Очистители воздуха</option><option value="3">Сумки для ноутбуков</option><option value="4">Сумки для покупок</option><option value="19">Увлажнители воздуха</option><option value="5">Чемоданы</option>
+                        </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="is-empty row">
+                        <div class="col-md-12">
+                            <div class="form-group is-empty">
+                                <label class="control-label" for="PromotionItems_0__BeginPrice">Начальная цена</label>
+                                <input class="form-control text-box single-line" id="PromotionItems_0__BeginPrice" name="PromotionItems[0].BeginPrice" placeholder="Начальная цена"
+                                    type="text" value="">
+                            </div>
+                            <span class="field-validation-valid text-danger" data-valmsg-for="item.BeginPrice" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="is-empty row">
+                        <div class="col-md-12">
+                            <div class="form-group is-empty">
+                                <label class="control-label" for="PromotionItems_0__PromotionalPrice">Акционаая цена</label>
+                                <input class="form-control text-box single-line" id="PromotionItems_0__PromotionalPrice" name="PromotionItems[0].PromotionalPrice"
+                                    placeholder="Акционаая цена" type="text" value="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="is-empty row">
+                        <div class="col-md-12">
+                            <div class="form-group is-empty">
+                                <label class="control-label" for="PromotionItems_0__Discount">Скидка %</label>
+                                <input class="form-control text-box single-line" id="PromotionItems_0__Discount" name="PromotionItems[0].Discount" placeholder="Скидка %"
+                                    type="text" value="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </fieldset>
+
+
+
+</div>
+
+<div class="col-lg-3 col-md-3 well-sm-visible well-xs-visible">
+    <div class="form-group is-empty">
+        <b><label class="control-label" for="Begin">Начало акции</label></b>
+        <input class="form-control text-box single-line" data-val="true" data-val-date="The field Начало акции must be a date." data-val-required="The Начало акции field is required."
+            id="Begin" name="Begin" type="date" value="01.01.0001">
+        <span class="field-validation-valid text-danger" data-valmsg-for="Begin" data-valmsg-replace="true"></span>
+    </div>
+    <div class="form-group is-empty">
+        <b><label class="control-label" for="End">Конец акции</label></b>
+        <input class="form-control text-box single-line" data-val="true" data-val-date="The field Конец акции must be a date." data-val-required="The Конец акции field is required."
+            id="End" name="End" type="date" value="01.01.0001">
+        <span class="field-validation-valid text-danger" data-valmsg-for="End" data-valmsg-replace="true"></span>
+    </div>
+    <div class="form-group">
+        <div class="checkbox">
+            <label>
+                <input data-val="true" data-val-required="The SubscriptionNotifierIsActive field is required." id="SubscriptionNotifierIsActive" name="SubscriptionNotifierIsActive" type="checkbox" value="true"><span class="checkbox-material"><span class="check"></span></span><input name="SubscriptionNotifierIsActive" type="hidden" value="false">
+                Отправлять подписчикам
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="checkbox">
+            <label>
+                <input data-val="true" data-val-required="The Agreement field is required." id="Agreement" name="Agreement" type="checkbox" value="true"><span class="checkbox-material"><span class="check"></span></span><input name="Agreement" type="hidden" value="false">
+                <span class="field-validation-valid text-danger" data-valmsg-for="Agreement" data-valmsg-replace="true"></span>
+                Я прочитал(a) <a href="#">правила добавления сферы деятельности!</a>
+            </label>
+        </div>
+    </div>
+    <input class="btn btn-primary btn-raised" type="submit" value="Добавить акцию">
+</div>
