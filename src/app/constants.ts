@@ -68,3 +68,4 @@ export const CITIES: Array<{ Name: string, Alias: string }> = [
   { Name: "Туркестан", Alias: "Turkestan" },
   { Name: "Шымкент", Alias: "SHymkent" },
 ];
+

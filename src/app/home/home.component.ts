@@ -53,11 +53,10 @@ export class HomeComponent implements OnInit, AfterViewInit
         const segments: UrlSegment[] = g.segments;
 
         let urlCity = g.segments[1] ? g.segments[1].path : "";
-        let page = g.segments[2] ? g.segments[2].path : "";
+        let pageNumber = g.segments[2] ? g.segments[2].path : "";
 
         let pageWithItems: Page<PromotionItem> = null;
         let cities = await this.cityService.getAll();
-
 
 
         if (urlCity && cities.some(city => city.Alias === urlCity))
@@ -82,13 +81,8 @@ export class HomeComponent implements OnInit, AfterViewInit
         this.page = pageWithItems;
         this.gifLoader = false;
 
-        console.log("Path from root", urlCity, page);
+        console.log("Path from root", urlCity, pageNumber);
 
-        // this.router.events.subscribe((event) => {
-        //   if (event instanceof NavigationEnd) {
-        //     console.log(event.url);
-        //   }
-        // });
     }
 
     private async getPromotionItems(): Promise<Page<PromotionItem>>

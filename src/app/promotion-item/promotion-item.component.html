@@ -4,11 +4,11 @@
             <div class="list-group" _style="padding: 10px 0;margin:0;">
                 <div class="row">
                     <div class="col-lg-3">
-                        <img class="circle img-responsive" src="http://lorempixel.com/55/55/business/1" alt="icon">
+                        <img class="circle img-responsive" src="http://tukifly.azurewebsites.net{{promotionItem.Promotion.MerchantLogoName}}" alt="icon">
                     </div>
                     <div class="col-lg-9">
-                        <h4 class="list-group-item-heading">Акция: {{promotionItem.Name}}</h4>
-                        <p class="list-group-item-text">(10 Февраля - 12 Февраля 2017)</p>
+                        <h4 class="list-group-item-heading">{{promotionItem.Promotion.Name}}</h4>
+                        <p class="list-group-item-text">({{promotionItem.Promotion.Begin}} - {{promotionItem.Promotion.End}})</p>
                     </div>
                 </div>
             </div>
@@ -27,6 +27,6 @@
                 </div>
             </div>
         </div>
-        <div class="alert alert-danger h3"><i class="fa fa-clock-o"></i> Завтра последний день</div>
+        <div class="alert alert-{{promotionItem.Promotion.TimeStatus.m_Item2}} h3"><i class="fa fa-clock-o"></i> {{promotionItem.Promotion.TimeStatus.m_Item1}}</div>
     </div>
 </div>
