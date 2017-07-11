@@ -13,7 +13,7 @@ export class PromotionItemService
 
   async getAll(page: number = 1): Promise<Page<PromotionItem>>
   {
-    return this.http.get(`http://tukifly.azurewebsites.net/api/PromotionItem?page=${page}&count=3`)
+    return this.http.get(`http://tukifly.azurewebsites.net/api/PromotionItem?page=${page}&count=10`)
         .toPromise()
         .then((res: Response) => res.json())
         .catch((error => console.log(error)));

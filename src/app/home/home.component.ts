@@ -8,7 +8,7 @@ import { Page } from "app/pagination-module/page";
 
 const PROMOTION_ITEMS = 'promotionItems';
 const PROMOTION_FIRST_TIME_LOADED = 'promotionTimeLoaded';
-const TIME_LIMIT_SECONDS = 30;
+const TIME_LIMIT_SECONDS = 1;
 
 @Component({
     selector: 'app-home',
@@ -49,7 +49,6 @@ export class HomeComponent implements OnInit, AfterViewInit
         this.page = pageWithItems;
         this.gifLoader = false;
 
-        console.log("page", this.page);
         console.log("Path from root", city);
 
         // this.router.events.subscribe((event) => {
@@ -81,7 +80,6 @@ export class HomeComponent implements OnInit, AfterViewInit
 
     private get promotionTimeExpired(): boolean
     {
-
         var firstTimeLoaded: number = Number.parseInt(localStorage.getItem(PROMOTION_FIRST_TIME_LOADED) || "0");
         var result  = false;
 

@@ -2,53 +2,52 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Page } from "app/pagination-module/page";
 
 @Component({
-  selector: 'app-pagination',
-  templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.css']
+    selector: 'app-pagination',
+    templateUrl: './pagination.component.html',
+    styleUrls: ['./pagination.component.css']
 })
 export class PaginationComponent implements OnInit
 {
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit() { }
+    ngOnInit() { }
 
-  @Input() page: Page<any>;
+    @Input() page: Page<any>;
 
-  generateArray(): number[]
-  {
-    var arr: number[] = [];
-    for (var i = this.firstPageNumber; i <= this.lastPageNumber; i++)
+    generateArray(): number[]
     {
-      arr.push(i);
+        var arr: number[] = [];
+        for (var i = this.firstPageNumber; i <= this.lastPageNumber; i++)
+        {
+            arr.push(i);
+        }
+
+        return arr;
     }
 
-    return arr;
-  }
+    get isCenter(): boolean
+    {
+        return this.page.PageCount - this.page.PageNumber > 5 && this.page.PageNumber > 5
+    }
 
-  get isCenter(): boolean
-  {
-    return this.page.PageCount - this.page.PageNumber > 5 && this.page.PageNumber > 5
-  }
+    get isLast(): boolean
+    {
+        return this.page.PageCount - this.page.PageNumber <= 5;
+    }
 
-  get isLast(): boolean
-  {
-    return this.page.PageCount - this.page.PageNumber <= 5;
-  }
+    get firstPageNumber(): number
+    {
+        let pageNumber = this.isCenter ? this.page.PageNumber - 5 : (this.isLast) ? this.page.PageCount - 10 : 1;
 
-  get firstPageNumber(): number
-  {
-    let pageNumber = this.isCenter ? this.page.PageNumber - 5 : (this.isLast) ? this.page.PageCount - 10 : 1;
+        return this.page.PageCount <= 10 ? 1 : pageNumber;
+    }
 
-    return this.page.PageCount <= 10 ? 1 : pageNumber;
-  }
+    get lastPageNumber(): number
+    {
+        let pageNumber = (this.isCenter) ? this.page.PageNumber + 4 : (this.isLast) ? this.page.PageCount : 10;
 
-  get lastPageNumber(): number
-  {
-    let pageNumber = (this.isCenter) ? this.page.PageNumber + 4 : (this.isLast) ? this.page.PageCount : 10;
-
-    console.log("lastPageNumber", pageNumber);
-    return this.page.PageCount <= 10 ? this.page.PageCount : pageNumber;
-  }
+        return this.page.PageCount <= 10 ? this.page.PageCount : pageNumber;
+    }
 
 }
