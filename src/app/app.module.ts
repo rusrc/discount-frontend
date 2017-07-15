@@ -14,6 +14,9 @@ import { PromotionItemComponent } from './promotion-item/promotion-item.componen
 
 import { RegistrationComponent } from './registration/registration.component';
 import { AuthorizationComponent } from './authorization/authorization.component'; import { PaginationModule } from "app/pagination-module/pagination/pagination.module";
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 //https://github.com/jelgblad/angular2-masonry
 //drag and drop https://github.com/akserg/ng2-dnd
 //http://tukifly.azurewebsites.net/Akkol/ru-Ru/Home/About
@@ -70,7 +73,9 @@ export function createTranslateLoader(http: Http)
                 useFactory: (createTranslateLoader),
                 deps: [Http]
             }
-        })
+        }),
+        StoreModule.provideStore(null),
+        StoreDevtoolsModule.instrumentOnlyWithExtension()
     ],
     providers: [],
     bootstrap: [AppComponent]
