@@ -15,6 +15,7 @@ import { PromotionItemComponent } from './promotion-item/promotion-item.componen
 import { RegistrationComponent } from './registration/registration.component';
 import { AuthorizationComponent } from './authorization/authorization.component'; import { PaginationModule } from "app/pagination-module/pagination/pagination.module";
 import { StoreModule } from '@ngrx/store';
+import { reducer } from 'app/redux/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 //https://github.com/jelgblad/angular2-masonry
@@ -71,13 +72,13 @@ export function createTranslateLoader(http: Http)
             loader: {
                 provide: TranslateLoader,
                 useFactory: (createTranslateLoader),
-                deps: [Http]
+                deps: [ Http ]
             }
         }),
-        StoreModule.provideStore(null),
+        StoreModule.provideStore(reducer),
         StoreDevtoolsModule.instrumentOnlyWithExtension()
     ],
     providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: [ AppComponent ]
 })
 export class AppModule { }
