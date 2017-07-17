@@ -9,8 +9,11 @@ export class MainEffects
     constructor(private action$: Actions) { }
 
     @Effect() update$ = this.action$
-        .ofType('SUPER_SIMPLE_EFFECT')
+        .ofType('TEST')
         .switchMap(() =>
-            Observable.of({ type: "SUPER_SIMPLE_EFFECT_HAS_FINISHED" })
+        {
+            console.log("Fire log");
+            return Observable.of({ type: "SUPER_SIMPLE_EFFECT_HAS_FINISHED" })
+        }
         );
 }

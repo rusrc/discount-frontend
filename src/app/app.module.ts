@@ -17,6 +17,8 @@ import { AuthorizationComponent } from './authorization/authorization.component'
 import { StoreModule } from '@ngrx/store';
 import { reducer } from 'app/redux/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from "@ngrx/effects";
+import { MainEffects } from "app/redux/effects";
 
 //https://github.com/jelgblad/angular2-masonry
 //drag and drop https://github.com/akserg/ng2-dnd
@@ -76,7 +78,8 @@ export function createTranslateLoader(http: Http)
             }
         }),
         StoreModule.provideStore(reducer),
-        StoreDevtoolsModule.instrumentOnlyWithExtension()
+        StoreDevtoolsModule.instrumentOnlyWithExtension(),
+        EffectsModule.run(MainEffects)
     ],
     providers: [],
     bootstrap: [ AppComponent ]

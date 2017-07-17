@@ -6,6 +6,10 @@ import { AngularMasonry, MasonryOptions } from 'angular2-masonry';
 import 'rxjs/add/operator/switchMap';
 import { Page } from "app/pagination-module/page";
 import { CityService } from "app/services/city.service";
+import { Store, Action } from "@ngrx/store";
+import { State as RootState } from "app/redux/reducers";
+import { Observable } from "rxjs/Observable";
+import * as fromTest from 'app/redux/reducers/Test';
 
 const PROMOTION_ITEMS = 'promotionItems';
 const PROMOTION_FIRST_TIME_LOADED = 'promotionTimeLoaded';
@@ -24,7 +28,7 @@ export class HomeComponent implements OnInit, AfterViewInit
     promotionItems: PromotionItem[];
     gifLoader: boolean = true;
     page: Page<PromotionItem>;
-
+    testState$: Observable<fromTest.State>;
     options: MasonryOptions = {
         transitionDuration: '0.3s',
         itemSelector: '.post-box',
@@ -37,8 +41,14 @@ export class HomeComponent implements OnInit, AfterViewInit
         private router: Router,
         private activeRoute: ActivatedRoute,
         private promotionItemService: PromotionItemService,
-        private cityService: CityService
-    ) { }
+        private cityService: CityService,
+        private store: Store<RootState>
+    )
+    {
+        this.testState$ = store.select(state => state.test);
+
+        this.testState$.subscribe(result => console.log(result.str));
+    }
 
     ngAfterViewInit()
     {
@@ -83,6 +93,11 @@ export class HomeComponent implements OnInit, AfterViewInit
 
         console.log("Path from root", urlCity, pageNumber);
 
+    }
+
+    onTest()
+    {
+        this.store.dispatch({ type: "TEST" })
     }
 
     private async getPromotionItems(): Promise<Page<PromotionItem>>

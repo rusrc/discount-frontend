@@ -1,12 +1,15 @@
 import { StoreModule, ActionReducer, combineReducers } from '@ngrx/store';
+import * as fromTest from './Test';
 
 //---------------------------------
 export interface State
 {
+    test: fromTest.State
     //search: fromSearch.State;
 }
 
 const reducers = {
+    test: fromTest.reducer
     //search: fromSearch.reducer,
 };
 
