@@ -15,7 +15,7 @@ export class DataFetchEffects
         .ofType('PROMOTION_ITEM_LOAD')
         .switchMap((action) =>
         {
-            return
+
             console.log("Fire log");
             return Observable.of({ type: "SUPER_SIMPLE_EFFECT_HAS_FINISHED" })
         }

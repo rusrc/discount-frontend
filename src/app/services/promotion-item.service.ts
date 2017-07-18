@@ -21,4 +21,11 @@ export class PromotionItemService
         .then((res: Response) => res.json())
         .catch((error => console.log(error)));
   }
+
+  getAll2(page: number = 1): Observable<Page<PromotionItem>>
+  {
+    return this.http.get(`${consts.ROOT_DOMAIN}/api/PromotionItem?page=${page}&count=10`)
+        .map((res: Response) => res.json())
+        .catch((error => Observable.throw(error)));
+  }
 }
