@@ -52,6 +52,10 @@ export function createTranslateLoader(http: Http)
     return new TranslateHttpLoader(http, './i18n/', '.json');
 }
 
+const appEffectsRun = [
+  EffectsModule.run(MainEffects),
+];
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -79,7 +83,7 @@ export function createTranslateLoader(http: Http)
         }),
         StoreModule.provideStore(reducer),
         StoreDevtoolsModule.instrumentOnlyWithExtension(),
-        EffectsModule.run(MainEffects)
+        ...appEffectsRun
     ],
     providers: [],
     bootstrap: [ AppComponent ]
