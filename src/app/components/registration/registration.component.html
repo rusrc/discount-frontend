@@ -1,0 +1,49 @@
+<section class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 well">
+            <form action="/AllCities/ru-Ru/Account/Register" method="post" role="form" novalidate="novalidate"><input name="__RequestVerificationToken" type="hidden" value="V36TMhl-zX1V2TVU5GowV5ah8KREwqW9Csh3cEVdLQ4veXJHmyExzQhDM7OGEdxXhk5_yNwHddMea3_m4PMd_caIfWRgzqo-pxC1Pvs7BzQ1">
+                <fieldset>
+                    <legend class="h3">
+                        Регистрация
+                    </legend>
+
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label" for="dateExpired">Ваш мэйл</label>
+                        <input class="form-control" data-val="true" data-val-email="The Ваш мэйл field is not a valid e-mail address." data-val-required="The Ваш мэйл field is required."
+                            id="dateExpired" name="Email" type="text" value="">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                        <p class="help-block">Например: example@mail.ru</p>
+                    </div>
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label" for="Password">Пароль</label>
+                        <input class="form-control" data-val="true" data-val-length="The field Пароль must be a string with a minimum length of 6 and a maximum length of 100."
+                            data-val-length-max="100" data-val-length-min="6" data-val-required="The Пароль field is required."
+                            id="Password" name="Password" type="password">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-group label-floating is-empty">
+                        <label class="control-label" for="ConfirmPassword">Поддтвердите пароль</label>
+                        <input class="form-control" data-val="true" data-val-equalto="Пароль не совпадает" data-val-equalto-other="*.Password" id="ConfirmPassword"
+                            name="ConfirmPassword" type="password">
+                        <span class="field-validation-valid text-danger" data-valmsg-for="ConfirmPassword" data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-group">
+                        <div id="g-recaptcha1" class="g-recaptcha">
+                            <div style="width: 304px; height: 78px;">
+                                <div>
+                                    <iframe src="https://www.google.com/recaptcha/api2/anchor?k=6LcBTBsTAAAAAJeaRZI5u4NtvhChGWImBWhUlIdS&amp;co=aHR0cDovL3R1a2lmbHkuYXp1cmV3ZWJzaXRlcy5uZXQ6ODA.&amp;hl=ru&amp;v=r20170629165701&amp;theme=dark&amp;size=normal&amp;cb=iw16cscw3l8v"
+                                        title="виджет reCAPTCHA" width="304" height="78" frameborder="0" scrolling="no" sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation"></iframe>
+                                </div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response"
+                                    style="width: 250px; height: 40px; border: 1px solid #c1c1c1; margin: 10px 25px; padding: 0px; resize: none;  display: none; "></textarea></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        Уже есть аккаунт? <a href="/AllCities/ru-Ru/Account/Login">Авторизуйтесь</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-raised btn-block"><b>Зарегистрироваться</b></button>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</section>
