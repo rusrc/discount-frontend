@@ -31,6 +31,8 @@ export class HomeComponent implements OnInit, AfterViewInit
     promotionItems: PromotionItem[];
     gifLoader: boolean = true;
     page: Page<PromotionItem>;
+    _urlCityName: string;
+    _pageNumber: number;
     testState$: Observable<fromTest.State>;
     promotionItemState$: Observable<fromPromotionItemAction.promotionItemState>;
     options: MasonryOptions = {
@@ -68,26 +70,26 @@ export class HomeComponent implements OnInit, AfterViewInit
         const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
         const segments: UrlSegment[] = g.segments;
 
-        let urlCity = g.segments[1] ? g.segments[1].path : "";
-        let pageNumber = g.segments[2] ? g.segments[2].path : "";
+        this._urlCityName = g.segments[1] ? g.segments[1].path : "";
+        this._pageNumber = Number.parseInt(g.segments[2] ? g.segments[2].path : "");
 
         let pageWithItems: Page<PromotionItem> = null;
         let cities = await this.cityService.getAll();
 
 
-        if (urlCity && cities.some(city => city.Alias === urlCity))
+        if (this._urlCityName && cities.some(city => city.Alias === this._urlCityName))
         {
-            console.log("with city only", urlCity)
+            console.log("with city only", this._urlCityName)
             //pageWithItems = await this.getPromotionItems();
         }
 
-        if (urlCity && !cities.some(city => city.Alias === urlCity))
+        if (this._urlCityName && !cities.some(city => city.Alias === this._urlCityName))
         {
             console.log("AllCities");
             //pageWithItems = await this.getPromotionItems();
         }
 
-        if (!urlCity)
+        if (!this._urlCityName)
         {
             console.log("Without cities");
             //pageWithItems = await this.getPromotionItems();
@@ -103,16 +105,22 @@ export class HomeComponent implements OnInit, AfterViewInit
 
         //this.promotionItems = pageWithItems.Items;
         //this.page = pageWithItems;
+        this.loadPromotionItems(this._urlCityName, 1);
 
-
-        console.log("Path from root", urlCity, pageNumber);
+        console.log("Path from root", this._urlCityName, this._pageNumber);
 
     }
 
     onTest()
     {
+        console.log("this._urlCity", this._urlCityName, this._pageNumber);
+        this.loadPromotionItems(this._urlCityName, 1);
+    }
+
+    private loadPromotionItems(cityName: string, pageNumber: number): void
+    {
         this.gifLoader = true;
-        this.store.dispatch({ type: "PROMOTION_ITEM_REQUEST" })
+        this.store.dispatch({ type: "PROMOTION_ITEM_REQUEST" });
     }
 
     private async getPromotionItems(): Promise<Page<PromotionItem>>
