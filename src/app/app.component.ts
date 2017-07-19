@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { CITIES } from "app/constants";
 
 @Component({

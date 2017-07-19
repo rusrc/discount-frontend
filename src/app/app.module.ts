@@ -1,24 +1,25 @@
-import { AdminModule } from './admin-module/admin.module';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Component } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpModule, Http } from '@angular/http';
-import { MasonryModule } from 'angular2-masonry';
+import { Component, NgModule } from '@angular/core';
+import { Http, HttpModule } from '@angular/http';
+import { RouterModule, Routes } from '@angular/router';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
+import { AboutComponent } from './components/about/about.component';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
-import { PromotionItemComponent } from './promotion-item/promotion-item.component';
-
-import { RegistrationComponent } from './registration/registration.component';
-import { AuthorizationComponent } from './authorization/authorization.component'; import { PaginationModule } from "app/pagination-module/pagination/pagination.module";
-import { StoreModule } from '@ngrx/store';
-import { reducer } from 'app/redux/reducers';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AuthorizationComponent } from './components/authorization/authorization.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { DataFetchEffects } from "app/_redux/effects/DataFetchEffects";
 import { EffectsModule } from "@ngrx/effects";
-import { MainEffects } from "app/redux/effects";
+import { HomeComponent } from './components/home/home.component';
+import { MainEffects } from "app/_redux/effects";
+import { MasonryModule } from 'angular2-masonry';
+import { PaginationModule } from "app/modules/pagination-module/pagination/pagination.module";
+import { PromotionItemComponent } from './components/promotion-item/promotion-item.component';
+import { RegistrationComponent } from './components/registration/registration.component';
+import { ShareModule } from "app/modules/share-module/share.module";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { reducer } from 'app/_redux/reducers';
 
 //https://github.com/jelgblad/angular2-masonry
 //drag and drop https://github.com/akserg/ng2-dnd
@@ -39,7 +40,6 @@ const routerConfig: Routes = [
         ]
     },
     { path: 'about', component: AboutComponent },
-    { path: 'admin', loadChildren: 'app/admin-module/admin.module#AdminModule' },
     { path: 'room', loadChildren: 'app/room-module/room/room.module#RoomModule' },
     { path: 'registration', component: RegistrationComponent },
     { path: 'authorization', component: AuthorizationComponent },
@@ -54,6 +54,7 @@ export function createTranslateLoader(http: Http)
 
 const appEffectsRun = [
   EffectsModule.run(MainEffects),
+  EffectsModule.run(DataFetchEffects)
 ];
 
 @NgModule({
@@ -66,6 +67,7 @@ const appEffectsRun = [
         AuthorizationComponent
     ],
     imports: [
+        ShareModule,
         BrowserModule,
         HttpModule,
         MasonryModule,

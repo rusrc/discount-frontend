@@ -1,6 +1,7 @@
-export class PromotionItem {
-
-    constructor(){
+export class PromotionItem
+{
+    constructor()
+    {
         this.Name = "Test test"
     }
 
