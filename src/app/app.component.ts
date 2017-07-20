@@ -5,7 +5,7 @@ import { CITIES } from "app/constants";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: [ './app.component.css' ]
 })
 export class AppComponent
 {
@@ -14,7 +14,7 @@ export class AppComponent
   title = 'app';
 
   public notificationOptions = {
-    position: ["bottom", "left"],
+    position: [ "bottom", "left" ],
     timeOut: 5000,
     lastOnBottom: true
   }

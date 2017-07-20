@@ -9,6 +9,7 @@ import { AfterContentInit, AfterViewInit, Component, DoCheck, OnInit, ViewChild 
 import { AngularMasonry, MasonryOptions } from 'angular2-masonry';
 
 import { CityService } from "app/services/city.service";
+import { FormGroup } from '@angular/forms';
 import { NotificationsService } from "angular2-notifications";
 import { Observable } from "rxjs/Observable";
 import { Page } from "app/modules/pagination-module/page";
@@ -29,12 +30,12 @@ const TIME_LIMIT_SECONDS = 1;
     ],
     templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit, AfterViewInit
+export class HomeComponent implements OnInit
 {
     promotionItems: PromotionItem[];
     gifLoader: boolean = true;
     page: Page<PromotionItem>;
-    _searchParams: PromotionItemQueryFilter;
+    searchParams: PromotionItemQueryFilter;
     promotionItemState$: Observable<fromPromotionItemAction.promotionItemState>;
     options: MasonryOptions = {
         transitionDuration: '0.3s',
@@ -44,22 +45,16 @@ export class HomeComponent implements OnInit, AfterViewInit
 
     @ViewChild(AngularMasonry) masonry: AngularMasonry;
 
-    constructor(
+    constructor
+    (
         private router: Router,
-        private activeRoute: ActivatedRoute,
-        private promotionItemService: PromotionItemService,
         private cityService: CityService,
         private store: Store<RootState>,
         private notification: NotificationsService
     )
     {
         this.promotionItemState$ = store.select(state => state.promotionItemState);
-        this._searchParams = new PromotionItemQueryFilter(location.href, this.router);
-    }
-
-    ngAfterViewInit()
-    {
-        //this.masonry.layoutComplete.subscribe(() => console.log('layout'));
+        this.searchParams = new PromotionItemQueryFilter(location.href, this.router);
     }
 
     async ngOnInit()
@@ -75,18 +70,11 @@ export class HomeComponent implements OnInit, AfterViewInit
             //this.masonry._msnry.reloadItems();
         });
 
-        this.loadPromotionItems(this._searchParams.cityName);
-        console.log(this._searchParams)
-    }
-
-    onTest()
-    {
-        this.loadPromotionItems(this._searchParams.cityName);
+        this.loadPromotionItems(this.searchParams.cityName);
     }
 
     private loadPromotionItems(cityName: string, pageNumber: number = 1): void
     {
-        this.gifLoader = true;
         this.store.dispatch({ type: "PROMOTION_ITEM_REQUEST" });
     }
 
@@ -127,12 +115,12 @@ export class HomeComponent implements OnInit, AfterViewInit
     //     return result;
     // }
 
-        //     if (this._urlCityName && cities.some(city => city.Alias === this._urlCityName))
-        //     console.log("with city only", this._urlCityName)
+    //     if (this._urlCityName && cities.some(city => city.Alias === this._urlCityName))
+    //     console.log("with city only", this._urlCityName)
 
-        // if (this._urlCityName && !cities.some(city => city.Alias === this._urlCityName))
-        //     console.log("AllCities");
+    // if (this._urlCityName && !cities.some(city => city.Alias === this._urlCityName))
+    //     console.log("AllCities");
 
-        // if (!this._urlCityName)
-        //     console.log("Without cities");
+    // if (!this._urlCityName)
+    //     console.log("Without cities");
 }
