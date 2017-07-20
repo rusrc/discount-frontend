@@ -1,4 +1,5 @@
 import { Component, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Http, HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -6,6 +7,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AboutComponent } from './components/about/about.component';
 import { AppComponent } from './app.component';
 import { AuthorizationComponent } from './components/authorization/authorization.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { DataFetchEffects } from "app/_redux/effects/DataFetchEffects";
 import { EffectsModule } from "@ngrx/effects";
@@ -14,8 +16,10 @@ import { MainEffects } from "app/_redux/effects";
 import { MasonryModule } from 'angular2-masonry';
 import { PaginationModule } from "app/modules/pagination-module/pagination/pagination.module";
 import { PromotionItemComponent } from './components/promotion-item/promotion-item.component';
+import { PromotionItemSearchFormComponent } from './components/promotion-item-search-form/promotion-item-search-form.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { ShareModule } from "app/modules/share-module/share.module";
+import { SimpleNotificationsModule } from 'angular2-notifications';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -40,7 +44,7 @@ const routerConfig: Routes = [
         ]
     },
     { path: 'about', component: AboutComponent },
-    { path: 'room', loadChildren: 'app/room-module/room/room.module#RoomModule' },
+    { path: 'room', loadChildren: 'app/modules/room-module/room/room.module#RoomModule' },
     { path: 'registration', component: RegistrationComponent },
     { path: 'authorization', component: AuthorizationComponent },
     { path: '**', redirectTo: 'home' }//Not found
@@ -53,8 +57,8 @@ export function createTranslateLoader(http: Http)
 }
 
 const appEffectsRun = [
-  EffectsModule.run(MainEffects),
-  EffectsModule.run(DataFetchEffects)
+    EffectsModule.run(MainEffects),
+    EffectsModule.run(DataFetchEffects)
 ];
 
 @NgModule({
@@ -64,13 +68,18 @@ const appEffectsRun = [
         AboutComponent,
         PromotionItemComponent,
         RegistrationComponent,
-        AuthorizationComponent
+        AuthorizationComponent,
+        PromotionItemSearchFormComponent
     ],
     imports: [
         ShareModule,
         BrowserModule,
         HttpModule,
         MasonryModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        SimpleNotificationsModule.forRoot(),
         PaginationModule.forRoot(),
         RouterModule.forRoot(routerConfig, {
             enableTracing: false,
@@ -80,7 +89,7 @@ const appEffectsRun = [
             loader: {
                 provide: TranslateLoader,
                 useFactory: (createTranslateLoader),
-                deps: [ Http ]
+                deps: [Http]
             }
         }),
         StoreModule.provideStore(reducer),
@@ -88,6 +97,6 @@ const appEffectsRun = [
         ...appEffectsRun
     ],
     providers: [],
-    bootstrap: [ AppComponent ]
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

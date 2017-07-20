@@ -13,4 +13,9 @@ export class AppComponent
   cities: Array<{ Name: string, Alias: string }> = CITIES;
   title = 'app';
 
+  public notificationOptions = {
+    position: ["bottom", "left"],
+    timeOut: 5000,
+    lastOnBottom: true
+  }
 }

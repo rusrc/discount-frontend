@@ -1,5 +1,5 @@
 <section class="container">
-    <form action="">
+    <!-- <form action="">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="h3">Акции и скидки супермаркетов в городе Алматы</h1>
@@ -29,13 +29,13 @@
             </div>
             <div class="col-lg-3 col-md-3">
                 <div class="form-group">
-                    <!--<br class="hidden-md hidden-sm hidden-xs" />-->
                     <label for="select111" class="control-label" style="color:transparent;"><i class="fa fa-search"></i> Найти</label>
                     <input class="btn btn-primary btn-block btn-raised" (click)="onTest()" value="Найти акцию">
                 </div>
             </div>
         </div>
-    </form>
+    </form> -->
+    <app-promotion-item-search-form></app-promotion-item-search-form>
 
     <div class="row well">
         <span *ngIf="gifLoader">
