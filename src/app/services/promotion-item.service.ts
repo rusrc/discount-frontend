@@ -26,7 +26,7 @@ export class PromotionItemService
 
   getAll(page: number = 1): Observable<Page<PromotionItem>>
   {
-    return this.http.get(`${consts.ROOT_DOMAIN}/api/PromotionItem?page=${page}&count=10`)
+    return this.http.get(`${consts.ROOT_DOMAIN}/api/PromotionItem22?page=${page}&count=10`)
         .map((res: Response) => res.json())
         .catch((error => Observable.throw(error || "server error")));
   }

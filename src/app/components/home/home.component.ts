@@ -97,10 +97,15 @@ export class HomeComponent implements OnInit, AfterViewInit
 
         this.promotionItemState$.subscribe(state =>
         {
+            if (state.ErrMsg)
+            {
+                alert(state.ErrMsg);
+            }
+
             this.promotionItems = state.promotionItems;
             this.gifLoader = state.isLoading;
-            this.masonry._msnry.reloadItems();
             this.page = state.page;
+            this.masonry._msnry.reloadItems();
         });
 
         //this.promotionItems = pageWithItems.Items;

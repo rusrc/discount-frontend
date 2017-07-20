@@ -20,22 +20,18 @@ export class DataFetchEffects
         .map((payload) => payload)
         .switchMap((payload) =>
         {
-            console.log("PROMOTION_ITEM_REQUEST", payload);
-
             return this.promotionItemService.getAll()
                 .map((res: Page<PromotionItem>) =>
                 {
-                    console.log("PROMOTION_ITEM_REQUEST_SUCCESS", res);
                     return ({
                         type: "PROMOTION_ITEM_REQUEST_SUCCESS",
                         payload: res
                     } as Action)
                 })
-                //.catch(err => console.log(err));
-
-
-            // console.log("Fire log");
-            // return Observable.of({ type: "SUPER_SIMPLE_EFFECT_HAS_FINISHED" })
+                .catch(err =>
+                {
+                    return Observable.of({ type: "PROMOTION_ITEM_REQUEST_ERROR", payload: { ErrMsg: err.statusText } })
+                });
         }
         );
 

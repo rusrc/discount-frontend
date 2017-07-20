@@ -6,13 +6,15 @@ export interface promotionItemState
 {
     promotionItems: PromotionItem[]
     page: Page<PromotionItem>,
-    isLoading: boolean
+    isLoading: boolean,
+    ErrMsg: string
 }
 
 const initState: promotionItemState = {
     promotionItems: [],
     page: null,
-    isLoading: false
+    isLoading: false,
+    ErrMsg: ""
 };
 
 
@@ -21,10 +23,10 @@ export function promotionItemReducer(state: promotionItemState = initState, acti
     switch (action.type)
     {
         case "PROMOTION_ITEM_REQUEST":
-            return { isLoading: true, promotionItems: [], page: null };
+            return { ...state, ...{ isLoading: true, ErrMsg: "" } };
         case "PROMOTION_ITEM_REQUEST_SUCCESS":
-            return { promotionItems: [...state.promotionItems, ...action.payload.Items], isLoading: false, page: action.payload }
-
+            return { ...state, ...{ promotionItems: action.payload.Items, page: action.payload, isLoading: false } }
+        case "PROMOTION_ITEM_REQUEST_ERROR": return { ...state, ...{ ErrMsg: action.payload.ErrMsg, isLoading: false } }
         default:
             return state;
     }
