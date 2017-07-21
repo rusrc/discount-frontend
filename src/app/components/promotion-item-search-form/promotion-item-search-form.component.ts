@@ -61,7 +61,7 @@ export class PromotionItemSearchFormComponent implements OnInit
             this.searchForm.get("PromotionFilterType").value,
         this.searchParams.cityName, this.searchParams.pageNumber);
 
-        this.router.navigateByUrl('/Home/AllCities'); //{ PromotionTimeType: "test", PromotionFilterType: "test2" }
+        this.router.navigateByUrl('/home/AllCities'); //{ PromotionTimeType: "test", PromotionFilterType: "test2" }
         this.store.dispatch({ type: "PROMOTION_ITEM_REQUEST" });
     }
 

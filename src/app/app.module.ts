@@ -14,6 +14,7 @@ import { EffectsModule } from "@ngrx/effects";
 import { HomeComponent } from './components/home/home.component';
 import { MainEffects } from "app/_redux/effects";
 import { MasonryModule } from 'angular2-masonry';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { PaginationModule } from "app/modules/pagination-module/pagination/pagination.module";
 import { PromotionItemComponent } from './components/promotion-item/promotion-item.component';
 import { PromotionItemSearchFormComponent } from './components/promotion-item-search-form/promotion-item-search-form.component';
@@ -47,7 +48,7 @@ const routerConfig: Routes = [
     { path: 'room', loadChildren: 'app/modules/room-module/room/room.module#RoomModule' },
     { path: 'registration', component: RegistrationComponent },
     { path: 'authorization', component: AuthorizationComponent },
-    { path: '**', redirectTo: 'home' }//Not found
+    { path: '**', component: PageNotFoundComponent }//Not found
 ]
 
 //https://github.com/ngx-translate/core
@@ -69,7 +70,8 @@ const appEffectsRun = [
         PromotionItemComponent,
         RegistrationComponent,
         AuthorizationComponent,
-        PromotionItemSearchFormComponent
+        PromotionItemSearchFormComponent,
+        PageNotFoundComponent
     ],
     imports: [
         ShareModule,
@@ -82,7 +84,7 @@ const appEffectsRun = [
         SimpleNotificationsModule.forRoot(),
         PaginationModule.forRoot(),
         RouterModule.forRoot(routerConfig, {
-            enableTracing: false,
+            enableTracing: true,
             useHash: false
         }),
         TranslateModule.forRoot({
